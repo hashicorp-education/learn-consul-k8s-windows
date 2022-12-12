@@ -1,0 +1,14 @@
+FROM mcr.microsoft.com/windows/servercore:1809
+
+RUN mkdir counting
+RUN curl https://github.com/hashicorp/demo-consul-101/releases/download/v0.0.5/counting-service_windows_amd64.exe.zip -L -o counting.zip
+RUN tar -xf counting.zip -C counting
+
+WORKDIR "C:\\counting"
+
+RUN ren counting-service?*.exe counting-service.exe
+
+EXPOSE 9001
+ENV PORT=9001
+
+CMD ["counting-service.exe"]
