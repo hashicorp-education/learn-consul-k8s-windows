@@ -21,7 +21,7 @@ This file is meant to be used as a guide in the process of deploying Consul Serv
 
 AWS EKS clusters must contain one or more Linux nodes to run core system pods that only run on Linux (such as coreDNS), also, we will be deploying a Consul Datacenter using Helm on those Linux nodes. You will need to follow these steps described [here](https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html) to enable Windows support in your EKS Cluster.  
 > [!IMPORTANT]
-> In case you don't have a AWS EKS cluster deployed with Consul installed, you can follow this [guide](./k8s-v1.0.x/helm-charts/EKS-cluster-setup-guide.md).
+> In case you don't have a AWS EKS cluster deployed with Consul installed, you can follow this [guide](./k8s-v1.0.x/helm-charts/README.md).
 
 ### Docker Images Requirements
 

@@ -26,7 +26,7 @@ This repository is the result of a PoC of how to inject Consul into Windows node
 |Envoy              |v1.24.0             |<https://hub.docker.com/r/envoyproxy/envoy-windows/tags>                         |
 |Consul Dataplane   |v1.0.0 custom build | [Binary](k8s-v1.0.x/binaries/)                                                  |
 
-To review how to deploy an AWS EKS cluster, you can follow this [guide](./k8s-v1.0.x/helm-charts/EKS-cluster-setup-guide.md).  
+To review how to deploy an AWS EKS cluster, you can follow this [guide](./k8s-v1.0.x/helm-charts/README.md).  
 
 ## Documentation
 
@@ -36,4 +36,4 @@ Below we list relevant documentation in this repository:
 - [Windows Troubleshooting](./WindowsTroubleshooting.md)
 - [Windows Consul Dataplane](k8s-v1.0.x/binaries/windows-consul-dataplane.md): Documentation describing the Consul Dataplane binary in this repository.
 - [Docker Images Readme](./k8s-v1.0.x/dockerfiles/README.md): Documentation describing the required Docker Images and building instructions.
-- [EKS Cluster Setup Guide](./k8s-v1.0.x/helm-charts/EKS-cluster-setup-guide.md): Instructions on how to deploy an AWS EKS cluster.
+- [EKS Cluster Setup Guide](./k8s-v1.0.x/helm-charts/README.md): Instructions on how to deploy an AWS EKS cluster.
