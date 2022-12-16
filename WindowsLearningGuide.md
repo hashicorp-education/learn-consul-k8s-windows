@@ -82,7 +82,13 @@ Just like we access Consul's UI, to access the Dashboard service we can forward 
 kubectl port-forward service/dashboard namespace consul 9002:9002
 ```
 
-The app is fairly simple, when connected you will see a counter being displayed in big white numbers, on the top right side of your screen higlighted in green the word "Connected". On the other hand, ff the Dashboard service can't connect to the Counting service you will see the counter locked in "-1" and the label on the top right corner displaying "Counting Service is Unreachable".
+The app is fairly simple, when connected you will see a counter being displayed in big white numbers, on the top right side of your screen highlighted in green the word "Connected". On the other hand, if the Dashboard service can't connect to the Counting service you will see the counter locked in "-1" and the label on the top right corner displaying "Counting Service is Unreachable".
+
+*Connection denied between Counting and Dashboard services*
+![Counting service unreachable](k8s-v1.0.x/images/connectionDenied.png)
+
+*Connection established between Counting and Dashboard services*
+![Connection Established](k8s-v1.0.x/images/connectionAllowed.png)
 
 #### Enforcing Intentions
 
