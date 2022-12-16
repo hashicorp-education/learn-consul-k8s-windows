@@ -46,7 +46,7 @@ Once configured the AWS account, next steps/commands will allow you create the E
 1. Create the EKS cluster on AWS. This step could take several minutes depending of the amount of nodes to be created.
 
    ```bash
-   eksctl create cluster --region $AWS_REGION --name $CLUSTER_NAME --nodegroup-name standard-workers --node-type $INSTANCE_TYPE --nodes=2 --ssh-access --ssh-public-key $KEY_PAIR_NAME
+   eksctl create cluster --region $AWS_REGION --version=1.22 --name $CLUSTER_NAME --nodegroup-name standard-workers --node-type $INSTANCE_TYPE --nodes=2 --ssh-access --ssh-public-key $KEY_PAIR_NAME
    ```
 
    Upon completion you should see a confirmation message that the Cluster was deployed in EKS as below
@@ -82,7 +82,7 @@ Once configured the AWS account, next steps/commands will allow you create the E
 1. Deploy Consul features through the Helm chart using the custom deployment file `consul-linux.yaml`. Features enabled: Server, UI and connectInject.
 
    ```bash
-   helm install consul hashicorp/consul --values consul-linux.yaml
+   helm install consul hashicorp/consul --values consul-linux.yaml --version "1.0.0"
    ```
 
    After finishing you should see a confirmation message that Consul was deployed on EKS cluster as below
