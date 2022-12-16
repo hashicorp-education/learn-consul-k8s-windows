@@ -49,7 +49,7 @@ spec:
       containers:
       - name: dashboard
         # Windows Dashboard service image:
-        image: 249437915022.dkr.ecr.us-east-2.amazonaws.com/dashboard-service-windows:latest
+        image: docker.mirror.hashicorp.services/windows/dashboard-service-windows:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9002
@@ -85,7 +85,7 @@ spec:
         - name: DP_SERVICE_NODE_NAME
           value: $(NODE_NAME)-virtual
         # Windows consul-dataplane image:  
-        image: 249437915022.dkr.ecr.us-east-2.amazonaws.com/consul-dataplane-windows:v1.0.0
+        image: docker.mirror.hashicorp.services/windows/consul-dataplane-windows:v1.0.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -167,7 +167,7 @@ spec:
           # To disable IP Tables, just pass an empty string as value for this env variable.
           value: ""
         # Windows consul-k8s-control-plane image:  
-        image: 249437915022.dkr.ecr.us-east-2.amazonaws.com/k8s-control-plane:1.0.0
+        image: docker.mirror.hashicorp.services/windows/k8s-control-plane:1.0.0
         imagePullPolicy: IfNotPresent
         name: consul-connect-inject-init
         resources:

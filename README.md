@@ -34,6 +34,6 @@ Below we list relevant documentation in this repository:
 
 - [Windows Learning Guide](./WindowsLearningGuide.md)
 - [Windows Troubleshooting](./WindowsTroubleshooting.md)
-- [Windows Consul Dataplane](k8s-v1.0.x/binaries/windows-consul-dataplane.md): Documentation describing the Consul Dataplane binary in this repository.
+- [Windows Consul Dataplane](k8s-v1.0.x/binaries/README.md): Documentation describing the Consul Dataplane binary in this repository.
 - [Docker Images Readme](./k8s-v1.0.x/dockerfiles/README.md): Documentation describing the required Docker Images and building instructions.
 - [EKS Cluster Setup Guide](./k8s-v1.0.x/helm-charts/README.md): Instructions on how to deploy an AWS EKS cluster.
