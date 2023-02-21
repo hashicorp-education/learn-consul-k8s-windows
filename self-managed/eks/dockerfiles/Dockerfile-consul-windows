@@ -1,0 +1,44 @@
+FROM mcr.microsoft.com/windows/servercore:1809
+
+RUN ["powershell", "Set-ExecutionPolicy", "Bypass", "-Scope", "Process", "-Force;"]
+RUN ["powershell", "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"]
+
+RUN choco install git.install -yf
+
+RUN mkdir C:\\consul
+RUN mkdir C:\\consul\\data
+RUN mkdir C:\\consul\\config
+RUN mkdir C:\\bin
+
+# Download Consul
+ARG CONSUL_VERSION=1.14.0
+RUN curl -sSL "https://releases.hashicorp.com/consul/%CONSUL_VERSION%/consul_%CONSUL_VERSION%_windows_amd64.zip" -o consul.zip
+RUN tar -xf consul.zip -C bin
+
+# Expose Consul Ports
+# Server RPC is used for communication between Consul clients and servers for internal
+# request forwarding.
+EXPOSE 8300
+
+# Serf LAN and WAN (WAN is used only by Consul servers) are used for gossip between
+# Consul agents. LAN is within the datacenter and WAN is between just the Consul
+# servers in all datacenters.
+EXPOSE 8301 8301/udp 8302 8302/udp
+
+# HTTP and DNS (both TCP and UDP) are the primary interfaces that applications
+# use to interact with Consul.
+EXPOSE 8500 8600 8600/udp
+
+# gRPC Port
+EXPOSE 8502
+
+# Set Path
+RUN SETX /M path "%PATH%;C:\bin;C:\Program Files\Git\bin;"
+
+# Copy Entrypoint Script
+COPY ./docker-entrypoint-windows.sh C:\\docker-entrypoint-windows.sh
+
+SHELL ["bash.exe"]
+ENTRYPOINT ["sh", "docker-entrypoint-windows.sh"]
+
+CMD ["agent", "-dev", "-client", "0.0.0.0"]

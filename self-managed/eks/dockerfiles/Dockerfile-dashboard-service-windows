@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/windows/servercore:1809
+
+RUN mkdir dashboard
+RUN curl https://github.com/hashicorp/demo-consul-101/releases/download/v0.0.5/dashboard-service_windows_amd64.exe.zip -L -o dashboard.zip
+RUN tar -xf dashboard.zip -C dashboard
+
+WORKDIR "C:\\dashboard"
+
+RUN ren dashboard-service?*.exe dashboard-service.exe
+
+EXPOSE 9002
+ENV PORT=9002
+ENV COUNTING_SERVICE_URL=http://counting.service.consul:9001
+
+CMD ["dashboard-service.exe"]

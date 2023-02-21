@@ -1,0 +1,21 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceIntentions
+metadata:
+  name: default
+spec:
+  destination:
+    name: '*'
+  sources:
+    - name: '*'
+      action: deny
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceIntentions
+metadata:
+  name: dashboard-to-counting
+spec:
+  destination:
+    name: counting
+  sources:
+    - name: dashboard
+      action: allow
