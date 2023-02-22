@@ -11,11 +11,14 @@ global:
   datacenter: dc1
   # Enables TLS across the cluster to verify authenticity of the Consul servers and clients.
   tls:
-    enabled: true
+    enabled: false
   # Enables ACLs across the cluster to secure access to data and APIs.
   acls:
     # If true, automatically manage ACL tokens and policies for all Consul components.
     manageSystemACLs: true
+    nodeSelector: |
+      kubernetes.io/os: linux
+      kubernetes.io/arch: amd64
 # Configures values that configure the Consul server cluster.
 server:
   enabled: true
@@ -41,5 +44,5 @@ connectInject:
 webhookCertManager:
   # When running mixed clusters, nodeSelector MUST be specified
   nodeSelector: |
-      kubernetes.io/os: linux
-      kubernetes.io/arch: amd64    
+    kubernetes.io/os: linux
+    kubernetes.io/arch: amd64

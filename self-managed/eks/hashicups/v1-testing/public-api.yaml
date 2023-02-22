@@ -62,3 +62,5 @@ spec:
               value: "http://product-api:9090"
             - name: PAYMENT_API_URI
               value: "http://payments:1800"
+      nodeSelector:
+        kubernetes.io/os: windows

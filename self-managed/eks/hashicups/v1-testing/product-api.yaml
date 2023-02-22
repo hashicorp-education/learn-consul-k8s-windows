@@ -93,3 +93,5 @@ spec:
             - name: config
               mountPath: /config
               readOnly: true
+      nodeSelector:
+        kubernetes.io/os: windows

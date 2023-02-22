@@ -123,3 +123,5 @@ spec:
             items:
               - key: nginx.conf
                 path: nginx.conf
+      nodeSelector:
+        kubernetes.io/os: windows

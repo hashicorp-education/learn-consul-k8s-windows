@@ -71,8 +71,8 @@ module "eks" {
       instance_types = ["t3a.medium"]
 
       min_size     = 1
-      max_size     = 3
-      desired_size = 1
+      max_size     = 5
+      desired_size = 3
     }
   }
 
@@ -105,42 +105,24 @@ module "eks" {
   }
 }
 
-/*
-# https://docs.aws.amazon.com/eks/latest/APIReference/API_Nodegroup.html#AmazonEKS-Type-Nodegroup-amiType
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_node_group
-resource "aws_eks_node_group" "windows_node_group" {
-  node_group_name = "services"
-  cluster_name    = module.eks.cluster_name
-  version         = module.eks.cluster_version
-
-  ami_type = "WINDOWS_CORE_2022_x86_64"
-  instance_types = ["t3a.medium"]
-
-  scaling_config {
-      min_size     = 1
-      max_size     = 3
-      desired_size = 1
-  }  
-
-  # (Required) Amazon Resource Name (ARN) of the IAM Role that
-  #  provides permissions for the EKS Node Group.
-  node_role_arn   = module.eks.cluster_iam_role_arn
-  subnet_ids      = module.vpc.public_subnets
-
-  depends_on = [module.eks]
-}
-
-*/
-
 # Uninstalls consul resources (Consul-UI, AWS ELB, and removes associated AWS resources)
 # on terraform destroy
-resource "null_resource" "kubernetes_consul_resources" {
-  provisioner "local-exec" {
-    when    = destroy
-    command = "kubectl delete svc/consul-ui --namespace consul"
-  }
-  depends_on = [module.eks]
-}
+#resource "null_resource" "kubernetes_consul_resources" {
+#  provisioner "local-exec" {
+#    when    = destroy
+#    command = "kubectl delete svc/consul-ui --namespace consul"
+#  }
+#  depends_on = [module.eks]
+#}
+
+/* 
+
+
+##
+Windows Support must first be enabled on the EKS cluster before the CSI add-on 
+can be successfully deployed:
+https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html
+##
 
 # https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/ 
 data "aws_iam_policy" "ebs_csi_policy" {
@@ -152,7 +134,7 @@ module "irsa-ebs-csi" {
   version = "4.7.0"
 
   create_role                   = true
-  role_name                     = "AmazonEKSTFEBSCSIRole-${module.eks.cluster_name}"
+  role_name                     = "AmazonEKSAddOnsRole-${module.eks.cluster_name}"
   provider_url                  = module.eks.oidc_provider
   role_policy_arns              = [data.aws_iam_policy.ebs_csi_policy.arn]
   oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
@@ -168,3 +150,5 @@ resource "aws_eks_addon" "ebs-csi" {
     "terraform" = "true"
   }
 }
+
+*/

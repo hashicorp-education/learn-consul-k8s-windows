@@ -2,29 +2,31 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
+  name: payments
   namespace: default
   labels:
-    app: frontend
+    app: payments
 spec:
   type: ClusterIP
   ports:
-    - port: 3000
-      targetPort: 3000
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
   selector:
-    app: frontend
+    app: payments
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: frontend
+  name: payments
   namespace: default
 automountServiceAccountToken: true
 ---
 apiVersion: consul.hashicorp.com/v1alpha1
 kind: ServiceDefaults
 metadata:
-  name: frontend
+  name: payments
   namespace: default
 spec:
   protocol: "http"
@@ -32,29 +34,28 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: payments
   namespace: default
+  labels:
+    app: payments
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: frontend
-      app: frontend
+      app: payments
   template:
     metadata:
       labels:
-        service: frontend
-        app: frontend
+        app: payments
       annotations:
         consul.hashicorp.com/connect-inject: "true"
     spec:
-      serviceAccountName: frontend
+      serviceAccountName: payments
       containers:
-        - name: frontend
-          image: hashicorpdemoapp/frontend:v1.0.2
+        - name: payments
+          image: hashicorpdemoapp/payments:v0.0.16
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 3000
-          env:
-            - name: NEXT_PUBLIC_PUBLIC_API_URL
-              value: "/"
+            - containerPort: 8080
+      nodeSelector:
+        kubernetes.io/os: windows

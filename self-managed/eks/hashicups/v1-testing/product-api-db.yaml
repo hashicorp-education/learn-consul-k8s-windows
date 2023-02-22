@@ -68,3 +68,5 @@ spec:
       volumes:
         - name: pgdata
           emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: windows
