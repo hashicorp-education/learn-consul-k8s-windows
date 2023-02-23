@@ -5,8 +5,13 @@ global:
   enabled: true
   # The prefix used for all resources created in the Helm chart.
   name: consul
-  # The consul image version.
+  # The Consul image version.
   image: hashicorp/consul:1.14.4
+  # The Consul K8S images with Windows support.
+  #imageK8S: joselorenzosouthworks/consul-k8s-control-plane-dev
+  imageK8S: docker.mirror.hashicorp.services/hashicorppreview/consul-k8s-control-plane:1.1.0-dev-pr-6f5043fe2b06463536d22ff1ad89fa602ede2962
+  #imageK8SWindows: joselorenzosouthworks/consul-k8s-control-plane-windows
+  #imageConsulDataplaneWindows: joselorenzosouthworks/consul-dataplane-windows
   # The name of the datacenter that the agents should register as.
   datacenter: dc1
   # Enables TLS across the cluster to verify authenticity of the Consul servers and clients.
