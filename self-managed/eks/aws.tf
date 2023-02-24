@@ -67,7 +67,7 @@ module "eks" {
     services = {
       name = "services"
 
-      ami_type = "WINDOWS_CORE_2022_x86_64"
+      ami_type = "WINDOWS_CORE_2019_x86_64"
       instance_types = ["t3a.medium"]
 
       min_size     = 1
