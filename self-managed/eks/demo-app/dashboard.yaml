@@ -50,4 +50,4 @@ spec:
         - name: COUNTING_SERVICE_URL
           value: 'http://localhost:9001'
       nodeSelector:
-        kubernetes.io/os: windows    
+        kubernetes.io/os: windows

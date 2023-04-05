@@ -6,7 +6,7 @@ global:
   # The prefix used for all resources created in the Helm chart.
   name: consul
   # The Consul image version.
-  image: hashicorp/consul:1.15.0
+  image: hashicorp/consul:1.14.3
   # The Consul K8S images with Windows support.
   imageK8S: hashicorppreview/consul-k8s-control-plane:1.0.0-alpha1
   imageK8SWindows: hashicorppreview/consul-k8s-control-plane:1.0.0-alpha1-windows
