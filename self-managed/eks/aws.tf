@@ -68,7 +68,7 @@ module "eks" {
       name = "services"
 
       ami_type = "WINDOWS_CORE_2019_x86_64"
-      instance_types = ["t3a.medium"]
+      instance_types = ["c5d.large"]
 
       min_size     = 1
       max_size     = 5
@@ -120,43 +120,6 @@ YAML
     depends_on = [module.eks]
     #depends_on = [module.eks.eks_managed_node_group[*]]
 }
-
-
-# Enable Windows support
-#resource "null_resource" "kubernetes_configmap_resources" {
-#  provisioner "local-exec" {
-#    # reference kubeconfig output from module.eks and run kubectl apply -f vpc-resource-controller-configmap.yaml
-#    command = "kubectl delete svc/consul-ui --namespace consul"
-#  }
-#  depends_on = [module.eks]
-#}
-
-/*
-resource "kubernetes_config_map" "windows_support" {
-  metadata {
-    name = "vpc-resource-controller-configmap"
-  }
-
-  data = {
-    api_host             = "myhost:443"
-    db_host              = "dbhost:5432"
-    "vpc-resource-controller-configmap.yaml" = "${file("/vpc-resource-controller-configmap.yaml")}"
-  }
-
-  depends_on = [module.eks]
-}
-
-*/
-# Uninstalls consul resources (Consul-UI, AWS ELB, and removes associated AWS resources)
-# on terraform destroy
-#resource "null_resource" "kubernetes_consul_resources" {
-#  provisioner "local-exec" {
-#    when    = destroy
-#    command = "kubectl delete svc/consul-ui --namespace consul"
-#  }
-#  depends_on = [module.eks]
-#}
-
 
 ##
 # Windows Support must first be enabled on the EKS cluster before the CSI add-on 
